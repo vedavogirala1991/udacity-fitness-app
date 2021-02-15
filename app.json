@@ -1,0 +1,12 @@
+{
+  "name": "udacity-fitness-app",
+  "displayName": "udacity-fitness-app",
+  "expo": {
+    "name": "udacity-fitness-app",
+    "slug": "udacity-fitness-app",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
