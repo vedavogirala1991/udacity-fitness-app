@@ -6,21 +6,31 @@ import {timeToString,getDailyReminderValue} from '../utils/helpers'
 import {fetchCalendarResults} from '../utils/api'
 import {Agenda as UdaciFitnessCalendar } from 'react-native-calendars'
 import DateHeader from './DateHeader'
+import MetricCard from './MetricCard'
 import {white} from '../utils/colors'
+import AppLoading from 'expo-app-loading'
 
 class History extends Component {
+  state = {
+    ready : false,
+  }
   componentDidMount() {
     const {dispatch} = this.props
 
     fetchCalendarResults()
       .then((entries) => dispatch(recieveEntries(entries)))
       .then(({entries})=> {
+        console.log('Tome to String :',timeToString())
+        console.log('Daily Reminder Value',getDailyReminderValue())
         if(!entries[timeToString()]) {
           dispatch(addEntry({
             [timeToString()]:getDailyReminderValue()
           }))
         }
       })
+      .then(()=>this.setState(() => ({
+        ready : true,
+      })))
   }
 
   renderItem = ({today,...metrics}, formattedDate, key) => {
@@ -33,7 +43,7 @@ class History extends Component {
             </Text>
           </View>
         : <TouchableOpacity onPress={()=>console.log('Press')}>
-            <Text>{JSON.stringify(metrics)}</Text>
+            <MetricCard metrics={metrics} date={formattedDate}/>
           </TouchableOpacity>
       }
     </View>)
@@ -51,6 +61,12 @@ class History extends Component {
 
   render () {
     const {entries} = this.props
+    const {ready} = this.state
+
+    if(ready===false){
+      return <AppLoading/>
+    }
+
     return (
       <UdaciFitnessCalendar
         items={entries}
