@@ -11,7 +11,8 @@ import {View,
 import AddEntry from './components/AddEntry'
 import History from './components/History'
 import {purple, white} from './utils/colors'
-import {createBottomTabNavigator, createMaterialTopTabNavigator} from 'react-navigation'
+import {createAppContainer} from 'react-navigation'
+import {createBottomTabNavigator} from 'react-navigation-tabs'
 import reducer from './reducers'
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
@@ -54,9 +55,7 @@ const TabNavigatorConfig = {
   }
 }
 
-const Tabs = Platform.OS === "ios"
-  ? createBottomTabNavigator(RouteConfigs, TabNavigatorConfig)
-  : createMaterialTopTabNavigator(RouteConfigs, TabNavigatorConfig)
+const Tabs = createAppContainer(createBottomTabNavigator(RouteConfigs, TabNavigatorConfig))
 
 
 
