@@ -20,8 +20,6 @@ class History extends Component {
     fetchCalendarResults()
       .then((entries) => dispatch(recieveEntries(entries)))
       .then(({entries})=> {
-        console.log('Tome to String :',timeToString())
-        console.log('Daily Reminder Value',getDailyReminderValue())
         if(!entries[timeToString()]) {
           dispatch(addEntry({
             [timeToString()]:getDailyReminderValue()

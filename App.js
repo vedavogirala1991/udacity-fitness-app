@@ -1,13 +1,8 @@
-import { StatusBar } from 'expo-status-bar'
 import React,{Component} from 'react'
 import {View,
-        Text,
         StyleSheet,
         Platform,
-        TouchableHighlight,
-        TouchableOpacity,
-        TouchableNativeFeedback,
-        TouchableWithoutFeedback} from 'react-native'
+        StatusBar} from 'react-native'
 import AddEntry from './components/AddEntry'
 import History from './components/History'
 import {purple, white} from './utils/colors'
@@ -17,6 +12,15 @@ import reducer from './reducers'
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
+import Constants from 'expo-constants'
+
+const UdaciStatusBar = ({backgroundColor,...props}) => {
+  return (
+    <View style={{backgroundColor, height : Constants.statusBarHeight}}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+    </View>
+  )
+}
 
 const RouteConfigs = {
   History : {
@@ -69,6 +73,7 @@ class App extends Component {
     return (
       <Provider store={createStore(reducer)}>
         <View style={styles.container}>
+          <UdaciStatusBar backgroundColor={purple} barStyle='light-content'/>
           <Tabs />
         </View>
       </Provider>
@@ -79,7 +84,6 @@ class App extends Component {
 const styles = StyleSheet.create({
   container : {
     flex : 1,
-    marginTop : 30,
   }
 })
 
