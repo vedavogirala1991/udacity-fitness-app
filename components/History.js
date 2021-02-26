@@ -33,7 +33,6 @@ class History extends Component {
   }
 
   renderItem = (dateKey, {today, ...metrics}, firstItemInDay) => {
-    console.log('dateKey : ',dateKey)
     return (
     <View style={styles.item}>
       {today
