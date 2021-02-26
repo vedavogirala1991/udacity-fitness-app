@@ -13,6 +13,7 @@ import AppLoading from 'expo-app-loading'
 class History extends Component {
   state = {
     ready : false,
+    selectedDate : new Date().toISOString().slice(0,10),
   }
   componentDidMount() {
     const {dispatch} = this.props
@@ -31,7 +32,8 @@ class History extends Component {
       })))
   }
 
-  renderItem = ({today,...metrics}, formattedDate, key) => {
+  renderItem = (dateKey, {today, ...metrics}, firstItemInDay) => {
+    console.log('dateKey : ',dateKey)
     return (
     <View style={styles.item}>
       {today
@@ -40,11 +42,20 @@ class History extends Component {
               {today}
             </Text>
           </View>
-        : <TouchableOpacity onPress={()=>console.log('Press')}>
-            <MetricCard metrics={metrics} date={formattedDate}/>
+        : <TouchableOpacity onPress={()=>this.props.navigation.navigate(
+          'EntryDetail',
+          { entryId : dateKey}
+        )}>
+            <MetricCard metrics={metrics}/>
           </TouchableOpacity>
       }
     </View>)
+  }
+
+  onDayPress = (day) => {
+    this.setState({
+      selectedDate : day.dateString
+    })
   }
 
   renderEmptyDate(formattedDate) {
@@ -59,7 +70,7 @@ class History extends Component {
 
   render () {
     const {entries} = this.props
-    const {ready} = this.state
+    const {ready, selectedDate} = this.state
 
     if(ready===false){
       return <AppLoading/>
@@ -68,7 +79,8 @@ class History extends Component {
     return (
       <UdaciFitnessCalendar
         items={entries}
-        renderItem={this.renderItem}
+        onDayPress={this.onDayPress}
+        renderItem={(item,firstItemInDay)=>this.renderItem(selectedDate, item, firstItemInDay)}
         renderEmptyDate={this.renderEmptyDate}
       />
     )

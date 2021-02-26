@@ -4,10 +4,9 @@ import DateHeader from './DateHeader'
 import {getMetricMetaInfo} from '../utils/helpers'
 import {gray} from '../utils/colors'
 
-const MetricCard = ({date,metrics}) => {
+const MetricCard = ({metrics}) => {
   return (
     <View>
-      {date && <DateHeader date={date}/>}
       {Object.keys(metrics).map((metric) => {
         const {getIcon, displayName, unit, backgroundColor} = getMetricMetaInfo(metric)
 
