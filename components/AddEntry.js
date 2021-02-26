@@ -111,7 +111,7 @@ class AddEntry extends Component {
 
   render () {
     const metaInfo = getMetricMetaInfo()
-    console.log('this.props.alreadyLogged : ',this.props.alreadyLogged)
+
     if(this.props.alreadyLogged) {
       return (
         <View style={styles.center}>
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   const key = timeToString()
-  
+
   return {
     alreadyLogged : state[key][0] && typeof state[key][0].today === 'undefined',
   }

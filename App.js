@@ -5,9 +5,11 @@ import {View,
         StatusBar} from 'react-native'
 import AddEntry from './components/AddEntry'
 import History from './components/History'
+import EntryDetail from './components/EntryDetail'
 import {purple, white} from './utils/colors'
 import {createAppContainer} from 'react-navigation'
 import {createBottomTabNavigator} from 'react-navigation-tabs'
+import {createStackNavigator} from 'react-navigation-stack'
 import reducer from './reducers'
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
@@ -41,7 +43,7 @@ const RouteConfigs = {
 
 const TabNavigatorConfig = {
   navigationOptions : {
-    header : null
+    headerShown : false
   },
   tabBarOptions: {
     activeTintColor : Platform.OS === "ios" ? purple : white,
@@ -59,9 +61,22 @@ const TabNavigatorConfig = {
   }
 }
 
-const Tabs = createAppContainer(createBottomTabNavigator(RouteConfigs, TabNavigatorConfig))
+const Tabs = createBottomTabNavigator(RouteConfigs, TabNavigatorConfig)
 
-
+const MainNavigator = createAppContainer(createStackNavigator({
+  Home: {
+    screen : Tabs,
+  },
+  EntryDetail : {
+    screen : EntryDetail,
+    navigationOptions : {
+      headerTintColor : white,
+      headerStyle : {
+        backgroundColor : purple,
+      }
+    }
+  }
+}))
 
 class App extends Component {
   componentDidMount() {
@@ -74,7 +89,7 @@ class App extends Component {
       <Provider store={createStore(reducer)}>
         <View style={styles.container}>
           <UdaciStatusBar backgroundColor={purple} barStyle='light-content'/>
-          <Tabs />
+          <MainNavigator />
         </View>
       </Provider>
     )

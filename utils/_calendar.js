@@ -17,8 +17,6 @@ function setDummyData () {
 
   for (let i = -183; i < 0; i++) {
     const time = timestamp + i * 24 * 60 * 60 * 1000
-    console.log('Time ', time)
-    console.log('Time to String',timeToString(time))
     const strTime = timeToString(time)
     dummyData[strTime] = getRandomNumber(3) % 2 === 0
       ? [{
