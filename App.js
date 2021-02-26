@@ -70,7 +70,6 @@ const MainNavigator = createAppContainer(createStackNavigator({
   EntryDetail : {
     screen : EntryDetail,
     navigationOptions : {
-      title : 'Entry Detail',
       headerTintColor : white,
       headerStyle : {
         backgroundColor : purple,
