@@ -3,14 +3,16 @@ import {View,
         StyleSheet,
         Platform,
         StatusBar} from 'react-native'
+import {createAppContainer} from 'react-navigation'
+import {createBottomTabNavigator} from 'react-navigation-tabs'
+import {createStackNavigator} from 'react-navigation-stack'
 import AddEntry from './components/AddEntry'
 import History from './components/History'
 import EntryDetail from './components/EntryDetail'
 import Live from './components/Live'
 import {purple, white} from './utils/colors'
-import {createAppContainer} from 'react-navigation'
-import {createBottomTabNavigator} from 'react-navigation-tabs'
-import {createStackNavigator} from 'react-navigation-stack'
+import {setLocalNotification} from './utils/helpers'
+
 import reducer from './reducers'
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
@@ -92,9 +94,7 @@ const MainNavigator = createAppContainer(createStackNavigator({
 
 class App extends Component {
   componentDidMount() {
-    console.log('Before')
-    debugger
-    console.log('After')
+    setLocalNotification()
   }
   render () {
     return (
