@@ -1,9 +1,10 @@
 {
+  "sdkVersion" : "20.0.0",
   "name": "udacity-fitness-app",
   "displayName": "udacity-fitness-app",
   "expo": {
     "name": "Udacity-Fitness-App",
-    "description": "The best trianthlon tracker ever"
+    "description": "The best trianthlon tracker ever",
     "slug": "udacity-fitness-app",
     "version": "1.0.0",
     "icon": "https://tylermsginnis.com/udacifitness-512.png",
