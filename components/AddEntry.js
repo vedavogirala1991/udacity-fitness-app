@@ -1,5 +1,6 @@
 import React,{Component} from 'react'
 import {View, TouchableOpacity, Text, Platform, StyleSheet} from 'react-native'
+import {NavigationActions} from 'react-navigation'
 import {getMetricMetaInfo, timeToString, getDailyReminderValue} from '../utils/helpers'
 import {submitEntry,removeEntry} from '../utils/api'
 import {white,purple} from '../utils/colors'
@@ -81,7 +82,7 @@ class AddEntry extends Component {
       eat:0,
     }))
 
-    //Navigate to home
+    this.toHome()
 
     submitEntry({key,entry})
 
@@ -104,9 +105,15 @@ class AddEntry extends Component {
       eat:0,
     }))
 
-    //Route to home
+    this.toHome()
 
     removeEntry(key)
+  }
+
+  toHome = () => {
+    this.props.navigation.dispatch(NavigationActions.back({
+      key : 'AddEntry'
+    }))
   }
 
   render () {
