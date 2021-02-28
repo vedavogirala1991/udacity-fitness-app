@@ -2,9 +2,20 @@
   "name": "udacity-fitness-app",
   "displayName": "udacity-fitness-app",
   "expo": {
-    "name": "udacity-fitness-app",
+    "name": "Udacity-Fitness-App",
+    "description": "The best trianthlon tracker ever"
     "slug": "udacity-fitness-app",
     "version": "1.0.0",
+    "icon": "https://tylermsginnis.com/udacifitness-512.png",
+    "notification": {
+      "icon": "https://tylermsginnis.com/udacifitness-45.png",
+    },
+    "ios": {
+      "bundleIdentifier": "org.udacityfitness.exp"
+    },
+    "android": {
+      "package": "org.udacityfitness.exp"
+    },
     "assetBundlePatterns": [
       "**/*"
     ]
